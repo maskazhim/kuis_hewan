@@ -3,8 +3,17 @@
  * Utilitas untuk menghasilkan efek suara menggunakan Web Audio API.
  */
 
+let audioCtx: AudioContext | null = null;
+
 const getAudioContext = () => {
-  return new (window.AudioContext || (window as any).webkitAudioContext)();
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+  }
+  // Browser mengharuskan interaksi pengguna untuk melanjutkan AudioContext jika dimulai dalam status ditangguhkan.
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+  }
+  return audioCtx;
 };
 
 export const playClickSound = () => {

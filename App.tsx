@@ -10,7 +10,7 @@ type Language = 'id' | 'en' | 'zh';
 type AppView = 'LOGIN' | 'GAME' | 'ADMIN'; 
 
 const ADMIN_PASSWORD = "MainAR2026";
-const QUIZ_TIMEOUT = 5; // 5 seconds limit
+const QUIZ_TIMEOUT = 10; // 10 seconds limit
 
 const App: React.FC = () => {
   const [view, setView] = useState<AppView>('LOGIN');
